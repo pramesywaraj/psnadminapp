@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { RouteGuardGuard } from './guards/route.guard';
+
 import { AdminComponent } from './pages/admin/admin.component';
 import { LoginComponent } from './pages/login/login.component';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -16,7 +20,18 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminComponent
+    component: AdminComponent,
+    canActivate: [RouteGuardGuard],
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'sekolah',
+        component: SekolahComponent
+      }
+    ]
   }
 ];
 

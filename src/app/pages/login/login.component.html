@@ -6,14 +6,14 @@
     <mat-card-content>
       <div class="login-form">
         <mat-form-field>
-          <input matInput placeholder="Masukkan email Anda" [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+          <input matInput placeholder="Masukkan username Anda" [formControl]="username" required>
+          <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Masukkan password Anda" [type]="hide ? 'password' : 'text'">
+          <input matInput placeholder="Masukkan password Anda" [type]="hide ? 'password' : 'text'" [formControl]="password">
           <mat-icon class="login-form_hidebutton" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </mat-form-field>
-        <button mat-raised-button color="primary">Masuk</button>
+        <button mat-raised-button color="primary" (click)="submitLogin()">Masuk</button>
       </div>
       
     </mat-card-content>

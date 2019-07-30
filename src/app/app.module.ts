@@ -2,10 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -21,6 +21,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RouteGuardGuard } from './guards/route.guard';
+import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
+import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { LoginComponent } from './pages/login/login.component';
     AdminComponent,
     SidemenuComponent,
     LoginComponent,
+    DashboardComponent,
+    SekolahComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,9 +48,10 @@ import { LoginComponent } from './pages/login/login.component';
     MatListModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [RouteGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
