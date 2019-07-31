@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService, public router: Router) {
+
     this.loginForm = formBuilder.group({
       'username': this.username,
       'password': this.password
@@ -28,10 +29,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if(this.auth.loadToken) {
+      this.router.navigate(['/admin/dashboard']);
+    }
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if(this.subscription) this.subscription.unsubscribe();
   }
 
   // getErrorMessage() {

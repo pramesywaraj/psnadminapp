@@ -24,6 +24,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { RouteGuardGuard } from './guards/route.guard';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
+import { PerlombaanComponent } from './pages/admin/perlombaan/perlombaan.component';
+import { PenginapanComponent } from './pages/admin/penginapan/penginapan.component';
+import { MedparComponent } from './pages/admin/medpar/medpar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
     LoginComponent,
     DashboardComponent,
     SekolahComponent,
+    PerlombaanComponent,
+    PenginapanComponent,
+    MedparComponent,
   ],
   imports: [
     BrowserModule,

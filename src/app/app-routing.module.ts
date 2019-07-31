@@ -7,6 +7,9 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
+import { PerlombaanComponent } from './pages/admin/perlombaan/perlombaan.component';
+import { PenginapanComponent } from './pages/admin/penginapan/penginapan.component';
+import { MedparComponent } from './pages/admin/medpar/medpar.component';
 
 const routes: Routes = [
   {
@@ -30,6 +33,18 @@ const routes: Routes = [
       {
         path: 'sekolah',
         component: SekolahComponent
+      },
+      {
+        path: 'perlombaan',
+        component: PerlombaanComponent
+      },
+      {
+        path: 'penginapan',
+        component: PenginapanComponent
+      },
+      {
+        path: 'mediapartner',
+        component: MedparComponent
       }
     ]
   }
