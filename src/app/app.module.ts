@@ -15,6 +15,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
 
 
 import { HeaderComponent } from './components/header/header.component';
@@ -55,7 +57,9 @@ import { MedparComponent } from './pages/admin/medpar/medpar.component';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule,
+    MatTableModule,
   ],
   providers: [RouteGuardGuard],
   bootstrap: [AppComponent]
