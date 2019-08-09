@@ -44,5 +44,35 @@ export class ContestService {
       );
   }
 
+  public deleteContest(id) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.delete<any>(this.config.baseUrl + 'contests/' + id, {headers: headers})
+      .pipe(
+        map(resp => {
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
+  public updateContest(contest) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.put<any>(this.config.baseUrl + 'contests/', contest,{headers: headers})
+      .pipe(
+        map(resp => {
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
 
 }

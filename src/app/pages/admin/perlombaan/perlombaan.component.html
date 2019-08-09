@@ -4,6 +4,10 @@
         <mat-tab label="List Lomba Terdaftar"> 
             <!-- Card Start -->
             <mat-card>
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Cari lomba....">
+                </mat-form-field>
+                          
                 <mat-card-title class="title">
                     Daftar lomba yang tersedia
                 </mat-card-title>
@@ -30,10 +34,12 @@
                                 <div class="contest_details-name"> 
                                     <p>Jumlah Anggota per Tim : {{element.memberPerTeam}} orang</p>
                                     <p>Maksimum Kuota : {{element.maxTeam}} tim</p>
-                                    <p>Harga per Siswa : Rp.{{element.pricePerStundent}}</p>                                    
+                                    <p>Harga per Siswa : Rp.{{element.pricePerStudent}}</p>
+                                    <p>Tim yang telah terdaftar : {{element.registeredTeam}} tim</p>                                                                      
                                 </div>
                                 <div class="contest_details-button">
-                                    <button mat-raised-button color="warn" (click)="deleteContest(element._id)">Hapus</button>
+                                    <button mat-raised-button color="basic" (click)="editContest(element)" style="margin-right: 10px;">{{element.registrationStatus === 'open' ? 'Tutup' : 'Buka'}}</button>
+                                    <button mat-raised-button color="warn" (click)="deleteContest(element._id)" >Hapus</button>
                                 </div>
                             </div>
                         </td>
@@ -76,7 +82,7 @@
                             <input class="input-form" formControlName="maxTeam" matInput placeholder="Kuota" required>
                         </mat-form-field>
                         <mat-form-field>
-                            <input class="input-form" formControlName="pricePerStundent" matInput placeholder="Harga per siswa" required>
+                            <input class="input-form" formControlName="pricePerStudent" matInput placeholder="Harga per siswa" required>
                         </mat-form-field>
                         <mat-form-field>
                             <textarea class="input-form" formControlName="img" matInput placeholder="Gambar lomba (URL file)" required></textarea>

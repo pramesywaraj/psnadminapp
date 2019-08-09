@@ -6,7 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class ConfigService {
 
-  baseUrl: string = 'http://api.pestasains.ipb.ac.id/';
+  baseUrl: string = 'https://apipestasains.ipb.ac.id/';
 
   constructor() { }
 }

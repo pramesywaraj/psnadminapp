@@ -36,7 +36,7 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
         memberPerTeam : ["", Validators.required],
         maxTeam : ["", Validators.required],
         img : ["", Validators.required],
-        pricePerStundent : ["", Validators.required],
+        pricePerStudent : ["", Validators.required],
         registrationStatus : ["open"],        
       }
     );
@@ -48,11 +48,15 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
       this.contestList = res.contests;
     });
 
-    console.log(this.contestList);
   }
 
   ngOnDestroy() {
     this.subscribe.unsubscribe();
+  }
+
+  applyFilter(filterValue: string) {
+    this.contestList.filter = filterValue.trim().toLowerCase();
+    console.log(this.contestList);
   }
 
   postContest() {
@@ -61,7 +65,7 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
         res => {
           console.log(res);
           alert('Lomba berhasil ditambahkan.');
-          this.router.navigate(['/admin/perlombaan']);
+          this.ngOnInit();
         },
         err => {
           console.log(err);
@@ -74,9 +78,50 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
   }
 
   deleteContest(id) {
-    console.log(id);
+    if(confirm('Apakah Anda yakin untuk menghapus lomba ini?' )) {
+      this.contestService.deleteContest(id).subscribe(
+        res => {
+          alert('Lomba berhasil dihapus');
+          this.ngOnInit();
+        },
+        err => {
+          console.log(err);
+          alert('Lomba gagal dihapus.')
+        }
+      );
+    }
+
   }
 
+  editContest(item) {
+    let data = this.contestList.filter(i => i._id == item._id);
+    if(data[0].registrationStatus === 'open') {
+      data[0].registrationStatus = 'close';
+    } else {
+      data[0].registrationStatus = 'open';      
+    }
 
+    let newData = {
+      "_id" : data[0]._id,
+      "name" : data[0].name,
+      "memberPerTeam": data[0].memberPerTeam,
+	    "maxTeam": data[0].maxTeam,
+	    "img": data[0].img,
+	    "pricePerStudent": data[0].pricePerStudent,
+	    "registrationStatus": data[0].registrationStatus
+    }
+    
+    this.contestService.updateContest(newData).subscribe(
+      res => {
+        alert('Status berhasil dirubah.');
+        this.ngOnInit();
+      },
+      err => {
+        console.log(err);
+        alert('Gagal update status');
+      }
+    );
+    
+  }
 
 }
