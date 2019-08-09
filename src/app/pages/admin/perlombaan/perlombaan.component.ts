@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-perlombaan',
   templateUrl: './perlombaan.component.html',
@@ -54,17 +55,13 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
     this.subscribe.unsubscribe();
   }
 
-  applyFilter(filterValue: string) {
-    this.contestList.filter = filterValue.trim().toLowerCase();
-    console.log(this.contestList);
-  }
-
   postContest() {
     if(this.contest.valid) {
       this.contestService.postContest(this.contest.value).subscribe(
         res => {
           console.log(res);
           alert('Lomba berhasil ditambahkan.');
+          this.contest.reset();
           this.ngOnInit();
         },
         err => {

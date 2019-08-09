@@ -2,13 +2,13 @@
     <div class="sub-container">
         <table mat-table [dataSource]="schoolList" multiTemplateDataRows class="mat-elevation-z8">
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Nama </th>
+                <th mat-header-cell *matHeaderCellDef> Nama Sekolah </th>
                 <td mat-cell *matCellDef="let element"> {{element.name}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="registrationStatus">
-                <th mat-header-cell *matHeaderCellDef> Status </th>
-                <td mat-cell *matCellDef="let element"> {{element.registrationStatus}} </td>
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> No Telp </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
             </ng-container>
 
             <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
@@ -16,19 +16,14 @@
                 <td mat-cell *matCellDef="let element" colspan="2">
                     <div class="example-element-detail"
                         [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                        <div class="contest_details-img"> 
-                            <img [src]="element.img" alt="">
-                        </div>
                         <div class="contest_details-name"> 
-                            <p>Jumlah Anggota per Tim : {{element.memberPerTeam}} orang</p>
-                            <p>Maksimum Kuota : {{element.maxTeam}} tim</p>
-                            <p>Harga per Siswa : Rp.{{element.pricePerStudent}}</p>
-                            <p>Tim yang telah terdaftar : {{element.registeredTeam}} tim</p>                                                                      
+                            <p>Alamat: {{element.address}}</p>
+                            <p>Email: {{element.email}}</p>                                                              
                         </div>
-                        <div class="contest_details-button">
+                        <!-- <div class="contest_details-button">
                             <button mat-raised-button color="basic" (click)="editContest(element)" style="margin-right: 10px;">{{element.registrationStatus === 'open' ? 'Tutup' : 'Buka'}}</button>
                             <button mat-raised-button color="warn" (click)="deleteContest(element._id)" >Hapus</button>
-                        </div>
+                        </div> -->
                     </div>
                 </td>
             </ng-container>
@@ -37,13 +32,52 @@
             <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
                 class="example-element-row"
                 [class.example-expanded-row]="expandedElement === element"
-                (click)="expandedElement = expandedElement === element ? null : element">
+                (click)="expandedElement = expandedElement === element ? null : element"
+                (click)="getStudentTeacher(element._id)"
+                >
             </tr>
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </table> 
     </div>
     <div class="sub-container">
-        <mat-card>Simple card</mat-card>
+        <mat-card>
+            <mat-card-title>Daftar Siswa</mat-card-title>
+            <mat-card-content *ngIf="studentList.length !== 0">
+                <div class="item-list">
+                    <p>Nama</p>
+                    <p>No Telepon</p>
+                    <p>Email</p>                    
+                </div>
+                <div class="item-list" *ngFor='let student of studentList'>
+                    <p>{{student.name}}</p>
+                    <p>{{student.phone}}</p>
+                    <p>{{student.email}}</p>                    
+                </div>
+            </mat-card-content>
+            <mat-card-content *ngIf="studentList.length === 0">
+                Sekolah belum mendaftarkan Siswa
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            <mat-card-title>Daftar Guru</mat-card-title>
+            <mat-card-content *ngIf="teacherList.length !== 0">
+                <div class="item-list">
+                    <p>Nama</p>
+                    <p>NIP</p>                    
+                    <p>No Telepon</p>
+                    <p>Email</p>                    
+                </div>
+                <div class="item-list" *ngFor='let teacher of teacherList'>
+                    <p>{{teacher.name}}</p>
+                    <p>{{teacher.NIP}}</p>
+                    <p>{{teacher.phone}}</p>                    
+                    <p>{{teacher.email}}</p>
+                </div>
+            </mat-card-content>
+            <mat-card-content *ngIf="teacherList.length === 0">
+                Sekolah belum mendaftarkan Guru
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>
     

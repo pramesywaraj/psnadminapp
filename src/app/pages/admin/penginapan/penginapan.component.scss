@@ -1,3 +1,51 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+
+    mat-form-field {
+        width: 100%;
+    }
+}
+
 table {
     width: 100%;
+    td {
+        cursor: pointer;
+    }
+}
+  
+tr.example-detail-row {
+    height: 0;
+}
+  
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #777;
+}
+  
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+  
+.example-element-row td {
+    border-bottom-width: 0;
+}
+  
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+
+    .contest_details-img {
+        padding-right: 3vw;
+        img {
+            width: 100px;
+            height: auto;
+        }
+    }
+
+    .contest_details-button {
+        margin-left: auto;
+        align-self: center;
+    }
 }

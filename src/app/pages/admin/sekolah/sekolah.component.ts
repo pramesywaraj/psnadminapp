@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { SchoolService } from '../../../services/school.service';
 
 @Component({
@@ -16,17 +16,41 @@ import { SchoolService } from '../../../services/school.service';
     ]),
   ]
 })
-export class SekolahComponent implements OnInit {
+export class SekolahComponent implements OnInit, OnDestroy {
 
   subscribe: Subscription;
   schoolList: any = [];
 
+  studentList: any = [];
+  teacherList: any = [];
+  
+
+  columnsToDisplay = ['name', 'phone'];
+
+
   constructor(private schoolService: SchoolService) { }
 
   ngOnInit() {
-    this.subscribe = this.schoolService.getSchool().subscribe(res => {
+    this.subscribe = this.schoolService.getSchools().subscribe(res => {
       this.schoolList = res.schools;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscribe.unsubscribe();
+  }
+
+  getStudentTeacher(schoolId) {
+    this.schoolService.getStudentTeacher(schoolId).subscribe(
+      res => {
+        this.teacherList = res[0].teachers;
+        this.studentList = res[1].students;
+
+        console.log(this.teacherList);
+        console.log(this.studentList);        
+      }, err => {
+        console.log(err);
+      });
   }
 
 }
