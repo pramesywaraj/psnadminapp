@@ -23,8 +23,11 @@ export class SekolahComponent implements OnInit, OnDestroy {
 
   studentList: any = [];
   teacherList: any = [];
+  billList: any = [];  
   
-
+  studentCol = ['name', 'phone', 'email'];
+  teacherCol = ['name', 'NIP', 'phone', 'email'];
+  billCol = ['type', 'VANumber', 'registration', 'totalPrice', 'payment'];  
   columnsToDisplay = ['name', 'phone'];
 
 
@@ -41,13 +44,15 @@ export class SekolahComponent implements OnInit, OnDestroy {
   }
 
   getStudentTeacher(schoolId) {
-    this.schoolService.getStudentTeacher(schoolId).subscribe(
+    this.schoolService.getStudentTeacherBill(schoolId).subscribe(
       res => {
         this.teacherList = res[0].teachers;
         this.studentList = res[1].students;
+        this.billList = res[2].bills;        
 
         console.log(this.teacherList);
-        console.log(this.studentList);        
+        console.log(this.studentList);
+        console.log(this.billList);                
       }, err => {
         console.log(err);
       });

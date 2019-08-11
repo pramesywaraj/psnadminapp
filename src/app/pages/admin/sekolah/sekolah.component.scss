@@ -57,8 +57,12 @@ table {
     width: 100%;
     
     .sub-container {
-        width: 50%;
+        width: 60%;
         margin: 0 1vw;
+    }
+
+    .min {
+      width: 40% !important;
     }
 }
 
@@ -74,4 +78,8 @@ table {
 
 mat-card {
     height: auto;
+}
+
+table {
+  width: 100%;
 }

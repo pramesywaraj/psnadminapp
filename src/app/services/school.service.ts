@@ -27,15 +27,16 @@ export class SchoolService {
       );
   }
 
-  getStudentTeacher(schoolId): Observable<any[]> {
+  getStudentTeacherBill(schoolId): Observable<any[]> {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
     headers = headers.append('Authorization', 'Bearer ' + this.userToken);
 
     let teacher = this.http.get<any>(this.config.baseUrl + 'teachers/school/' + schoolId, {headers: headers});
     let student = this.http.get<any>(this.config.baseUrl + 'students/school/' + schoolId, {headers: headers});
+    let bill = this.http.get<any>(this.config.baseUrl + 'bills/school/' + schoolId, {headers: headers});    
 
-    return forkJoin([teacher, student]);
+    return forkJoin([teacher, student, bill]);
 
   }
 

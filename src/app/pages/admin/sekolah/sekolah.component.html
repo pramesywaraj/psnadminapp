@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="sub-container">
+    <div class="sub-container min">
         <table mat-table [dataSource]="schoolList" multiTemplateDataRows class="mat-elevation-z8">
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Nama Sekolah </th>
@@ -41,42 +41,102 @@
     </div>
     <div class="sub-container">
         <mat-card>
-            <mat-card-title>Daftar Siswa</mat-card-title>
-            <mat-card-content *ngIf="studentList.length !== 0">
-                <div class="item-list">
-                    <p>Nama</p>
-                    <p>No Telepon</p>
-                    <p>Email</p>                    
-                </div>
-                <div class="item-list" *ngFor='let student of studentList'>
-                    <p>{{student.name}}</p>
-                    <p>{{student.phone}}</p>
-                    <p>{{student.email}}</p>                    
-                </div>
-            </mat-card-content>
-            <mat-card-content *ngIf="studentList.length === 0">
-                Sekolah belum mendaftarkan Siswa
-            </mat-card-content>
-        </mat-card>
-        <mat-card>
-            <mat-card-title>Daftar Guru</mat-card-title>
-            <mat-card-content *ngIf="teacherList.length !== 0">
-                <div class="item-list">
-                    <p>Nama</p>
-                    <p>NIP</p>                    
-                    <p>No Telepon</p>
-                    <p>Email</p>                    
-                </div>
-                <div class="item-list" *ngFor='let teacher of teacherList'>
-                    <p>{{teacher.name}}</p>
-                    <p>{{teacher.NIP}}</p>
-                    <p>{{teacher.phone}}</p>                    
-                    <p>{{teacher.email}}</p>
-                </div>
-            </mat-card-content>
-            <mat-card-content *ngIf="teacherList.length === 0">
-                Sekolah belum mendaftarkan Guru
-            </mat-card-content>
+                <mat-tab-group>
+                    <!-- List Guru dan Murid Start -->
+                        <mat-tab label="Daftar siswa"> 
+                            <!-- Card Start -->
+                            <mat-card>    
+                
+                                <table mat-table [dataSource]="studentList" multiTemplateDataRows class="mat-elevation-z8">
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef> Nama </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="phone">
+                                        <th mat-header-cell *matHeaderCellDef> Telepon </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="email">
+                                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                    </ng-container>
+                            
+                                    <tr mat-header-row *matHeaderRowDef="studentCol"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: studentCol"></tr>
+                                </table> 
+                
+                            </mat-card>    
+                            <!-- Card End -->
+                        </mat-tab>
+                        <!-- Daftar Guru dan Murid End -->
+                
+                        <!-- Daftar Guru Pendamping Start -->
+                        <mat-tab label="Daftar guru"> 
+                            <!-- Card Start -->
+                            <mat-card>
+                                <table mat-table [dataSource]="teacherList" multiTemplateDataRows class="mat-elevation-z8">
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef> Nama </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="NIP">
+                                        <th mat-header-cell *matHeaderCellDef> NIP </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.NIP}} </td>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="phone">
+                                        <th mat-header-cell *matHeaderCellDef> Telepon </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="email">
+                                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                                    </ng-container>
+                            
+                                    <tr mat-header-row *matHeaderRowDef="teacherCol"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: teacherCol"></tr>
+                                </table> 
+                            </mat-card>    
+                        </mat-tab>
+                        <mat-tab label="Daftar tagihan"> 
+                            <!-- Card Start -->
+                            <mat-card>
+                                <table mat-table [dataSource]="billList" multiTemplateDataRows class="mat-elevation-z8">
+                                    <ng-container matColumnDef="type">
+                                        <th mat-header-cell *matHeaderCellDef> Tipe </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                                    </ng-container>
+                
+                                    <ng-container matColumnDef="VANumber">
+                                        <th mat-header-cell *matHeaderCellDef> No VA </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.VANumber}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="registration">
+                                        <th mat-header-cell *matHeaderCellDef> Daftar apa saja </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.registration.numberOfStudent}} siswa dan {{element.registration.numberOfTeacher}} guru </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="totalPrice">
+                                        <th mat-header-cell *matHeaderCellDef> Total </th>
+                                        <td mat-cell *matCellDef="let element"> Rp.{{element.totalPrice}}</td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="payment">
+                                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.payment.status}}</td>
+                                    </ng-container>
+                            
+                                    <tr mat-header-row *matHeaderRowDef="billCol"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: billCol"></tr>
+                                </table> 
+                            </mat-card>    
+                        </mat-tab>
+                    </mat-tab-group>
         </mat-card>
     </div>
 </div>
