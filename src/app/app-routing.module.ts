@@ -10,6 +10,7 @@ import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
 import { PerlombaanComponent } from './pages/admin/perlombaan/perlombaan.component';
 import { PenginapanComponent } from './pages/admin/penginapan/penginapan.component';
 import { MedparComponent } from './pages/admin/medpar/medpar.component';
+import { EditLombaComponent } from './pages/admin/perlombaan/edit-lomba/edit-lomba.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,14 @@ const routes: Routes = [
       },
       {
         path: 'perlombaan',
-        component: PerlombaanComponent
+        component: PerlombaanComponent,
+        // children:[
+          
+        // ]
+      },
+      {
+        path: 'editlomba',
+        component: EditLombaComponent,
       },
       {
         path: 'penginapan',

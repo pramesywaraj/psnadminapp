@@ -34,6 +34,7 @@
                                     <p>Tim yang telah terdaftar : {{element.registeredTeam}} tim</p>                                                                      
                                 </div>
                                 <div class="contest_details-button">
+                                    <button mat-raised-button color="basic" (click)="editContestAll(element)" style="margin-right: 10px;">Edit</button>
                                     <button mat-raised-button color="basic" (click)="editContest(element)" style="margin-right: 10px;">{{element.registrationStatus === 'open' ? 'Tutup' : 'Buka'}}</button>
                                     <button mat-raised-button color="warn" (click)="deleteContest(element._id)" >Hapus</button>
                                 </div>

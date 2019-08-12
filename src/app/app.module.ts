@@ -30,6 +30,7 @@ import { SekolahComponent } from './pages/admin/sekolah/sekolah.component';
 import { PerlombaanComponent } from './pages/admin/perlombaan/perlombaan.component';
 import { PenginapanComponent } from './pages/admin/penginapan/penginapan.component';
 import { MedparComponent } from './pages/admin/medpar/medpar.component';
+import { EditLombaComponent } from './pages/admin/perlombaan/edit-lomba/edit-lomba.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MedparComponent } from './pages/admin/medpar/medpar.component';
     PerlombaanComponent,
     PenginapanComponent,
     MedparComponent,
+    EditLombaComponent,
   ],
   imports: [
     BrowserModule,

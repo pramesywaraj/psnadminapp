@@ -1,0 +1,29 @@
+<mat-card>
+    <mat-card-title class="title">
+        Tambah Lomba
+    </mat-card-title>
+
+    <form [formGroup]="contest" (ngSubmit)="editContest()">
+        <div class="form-container">
+            <mat-form-field>
+                <input class="input-form" formControlName="name" matInput placeholder="Nama lomba" required >
+            </mat-form-field> 
+            <mat-form-field>
+                <input class="input-form" formControlName="memberPerTeam" matInput placeholder="Jumlah orang dalam tim" required >
+            </mat-form-field> 
+            <mat-form-field>
+                <input class="input-form" formControlName="maxTeam" matInput placeholder="Kuota" required >
+            </mat-form-field>
+            <mat-form-field>
+                <input class="input-form" formControlName="pricePerStudent" matInput placeholder="Harga per siswa" required >
+            </mat-form-field>
+            <mat-form-field>
+                <textarea class="input-form" formControlName="img" matInput placeholder="Gambar lomba (URL file)" required ></textarea>
+            </mat-form-field> 
+            <button mat-raised-button color="primary" type="submit">
+                Tambahkan Lomba
+            </button>
+        </div>    
+    </form>
+
+</mat-card>    

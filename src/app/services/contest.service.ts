@@ -30,6 +30,20 @@ export class ContestService {
       );
   }
 
+  public editContest(contest) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+    return this.http.put<any>(this.config.baseUrl + 'contests', contest, {headers: headers})
+      .pipe(
+        map(resp => { 
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
   public postContest(contest) {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');

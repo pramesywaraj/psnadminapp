@@ -121,4 +121,9 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
     
   }
 
+  editContestAll(contest) {
+    localStorage.setItem('contestItem', JSON.stringify(contest));
+    this.router.navigate(['/admin/editlomba']);
+  }
+
 }
