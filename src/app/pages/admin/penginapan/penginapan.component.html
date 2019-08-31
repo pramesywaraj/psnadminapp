@@ -1,6 +1,53 @@
 <mat-card>
     <mat-tab-group>
-      <!-- List Guru dan Murid Start -->
+         <!-- List pemesan penginapan -->
+         <mat-tab label="List Pemesan Penginapan"> 
+            <!-- Card Start -->
+            <mat-card>    
+                <mat-card-title class="title">
+                    Daftar Pemesan Penginapan
+                </mat-card-title>
+
+                <table mat-table [dataSource]="accomodationList" multiTemplateDataRows class="mat-elevation-z8">
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Nama </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="quota">
+                        <th mat-header-cell *matHeaderCellDef> Kuota </th>
+                        <td mat-cell *matCellDef="let element"> {{element.quota}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="pricePerNight">
+                        <th mat-header-cell *matHeaderCellDef> Harga per malam </th>
+                        <td mat-cell *matCellDef="let element"> {{element.pricePerNight}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="reservedQuota">
+                        <th mat-header-cell *matHeaderCellDef> Jumlah dipesan </th>
+                        <td mat-cell *matCellDef="let element"> {{element.reservedQuota}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-raised-button color="warn" (click)="deleteAccomodation(element._id)">
+                                Hapus
+                            </button>
+                        </td>
+                    </ng-container>
+                    
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+                </table> 
+
+            </mat-card>    
+            <!-- Card End -->
+        </mat-tab>
+         <!-- List pemesan penginapan -->
+
+        <!-- List paket penginapan -->
         <mat-tab label="List paket penginapan"> 
             <!-- Card Start -->
             <mat-card>    
@@ -45,9 +92,9 @@
             </mat-card>    
             <!-- Card End -->
         </mat-tab>
-        <!-- Daftar Guru dan Murid End -->
+        <!-- List penginapan -->
 
-        <!-- Daftar Guru Pendamping Start -->
+        <!-- Tambah paket penginapan -->
         <mat-tab label="Tambah paket penginapan"> 
             <!-- Card Start -->
             <mat-card>
@@ -75,6 +122,6 @@
             </mat-card>    
         <!-- Card End -->
         </mat-tab>
-      <!-- Daftar Guru Pendamping End -->
+        <!-- Tambah paket penginapan -->
     </mat-tab-group>
 </mat-card>          

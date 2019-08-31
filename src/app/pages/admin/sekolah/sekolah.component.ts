@@ -4,6 +4,8 @@ import { FormGroup } from '@angular/forms';
 import { Subscription, Observable } from 'rxjs';
 import { SchoolService } from '../../../services/school.service';
 
+import * as FileSaver from 'file-saver';
+
 @Component({
   selector: 'app-sekolah',
   templateUrl: './sekolah.component.html',
@@ -57,5 +59,4 @@ export class SekolahComponent implements OnInit, OnDestroy {
         console.log(err);
       });
   }
-
 }

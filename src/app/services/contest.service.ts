@@ -88,5 +88,24 @@ export class ContestService {
       );
   }
 
+  public contestDownload(contestId): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.get(
+      this.config.baseUrl + 'teams/excel/contest/' + contestId, {responseType: 'blob', headers: header})
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          console.log('This error inside the store service and orderListDownload function...', err);
+          return throwError(err);
+        })
+      );
+  }
+
 
 }

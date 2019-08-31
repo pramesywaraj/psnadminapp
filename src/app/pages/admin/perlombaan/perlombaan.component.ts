@@ -8,6 +8,8 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+import * as FileSaver from 'file-saver';
+
 
 @Component({
   selector: 'app-perlombaan',
@@ -124,6 +126,18 @@ export class PerlombaanComponent implements OnInit, OnDestroy {
   editContestAll(contest) {
     localStorage.setItem('contestItem', JSON.stringify(contest));
     this.router.navigate(['/admin/editlomba']);
+  }
+
+  public downloadContest(id, contestName) {
+    this.contestService.contestDownload(id).subscribe(data => 
+      {
+        console.log(data);
+        FileSaver.saveAs(data, contestName);
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
   }
 
 }
