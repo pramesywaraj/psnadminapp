@@ -29,6 +29,21 @@ export class AccomodationService {
       );
   }
 
+  public getAllBookers() {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+    
+    return this.http.get<any>(this.config.baseUrl + 'booking/', {headers: headers})
+      .pipe(
+        map(resp => { 
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
   public postAccomodation(accomodation) {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -55,6 +70,24 @@ export class AccomodationService {
         },
         err => console.log(err)
         )
+      );
+  }
+
+  public downloadAccomodation(): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.get(
+      this.config.baseUrl + 'booking/download', {responseType: 'blob', headers: header})
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          return throwError(err);
+        })
       );
   }
 }

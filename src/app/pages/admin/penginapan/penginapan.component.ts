@@ -8,6 +8,9 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AccomodationService } from '../../../services/accomodation.service';
 
+import * as FileSaver from 'file-saver';
+
+
 @Component({
   selector: 'app-penginapan',
   templateUrl: './penginapan.component.html',
@@ -25,7 +28,13 @@ export class PenginapanComponent implements OnInit, OnDestroy {
 
   columnsToDisplay = ['name', 'quota', 'pricePerNight', 'reservedQuota', 'action'];
   accomodationList: any = [];
+  bookersList: any = [];
+
+  teacherBookers: any = [];
+  studentBookers: any = [];
+  
   subscribe: Subscription;
+  subscribe2: Subscription;  
 
   accomodation : FormGroup;
 
@@ -39,15 +48,33 @@ export class PenginapanComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {
-    this.subscribe = this.accomodationService.getAccomodations().subscribe(res => {
+  async ngOnInit() {
+    this.subscribe = await this.accomodationService.getAccomodations().subscribe(res => {
       this.accomodationList = res.accommodations;
       console.log(res);
     });
+
+    this.subscribe2 = await this.accomodationService.getAllBookers().subscribe(res => {
+      let tempBookers = res.bookings;
+      tempBookers.forEach(element => {
+        this.bookersSelection(element);
+      });
+    });
+
+    console.log(this.teacherBookers);
+  }
+
+  bookersSelection(booker) {
+    if(booker.userType === 'teacher') 
+      this.teacherBookers.push(booker);
+    else 
+      this.studentBookers.push(booker);
   }
 
   ngOnDestroy() {
     this.subscribe.unsubscribe();
+    this.subscribe2.unsubscribe();
+    
   }
 
   postAccomodation() {
@@ -82,5 +109,20 @@ export class PenginapanComponent implements OnInit, OnDestroy {
         }
       );
     }
+  }
+
+  public downloadAccomodationData() {
+    let today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth();
+
+    this.accomodationService.downloadAccomodation().subscribe(data => 
+      {
+        FileSaver.saveAs(data, "Data_Pemesan_Penginapan_PSN2019_" + day + "-" + month + "-" + "2019");
+      },
+      err => {
+        console.log('err', err);
+      }
+    );
   }
 }
