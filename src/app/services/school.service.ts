@@ -40,6 +40,24 @@ export class SchoolService {
 
   }
 
+  public downloadTeachers(): Observable<any> {
+    let header = new HttpHeaders();
+    header = header.append('Authorization', 'Bearer ' + this.userToken);
+
+    return this.http.get(
+      this.config.baseUrl + 'teachers/download/excel', {responseType: 'blob', headers: header})
+      .pipe(
+        map(
+          resp => {
+            return resp;
+          }
+        ),
+        catchError(err => {
+          return err;
+        })
+      );
+  }
+
   // public getTeacher(schoolId) {
   //   let headers = new HttpHeaders();
   //   headers.append('Content-Type', 'application/json');
