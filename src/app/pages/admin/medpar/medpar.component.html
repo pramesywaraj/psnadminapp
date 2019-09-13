@@ -1,2 +1,45 @@
-<mat-card>Media Partner</mat-card>
+<mat-card>
+    <h3>
+        Menu untuk update status Pembayaran 
+    </h3>
+
+    <p>Kamu bisa update secara manual tagihan yang sudah lunas.</p>
+
+    <mat-card-content>
+        
+        <div class="search-field" layout-padding>
+            <div class="flex-container">
+                <mat-form-field class="full-width">
+                    <input matInput [(ngModel)]="search" placeholder="Nomor VA">
+                </mat-form-field>
+
+                <div>
+                    <button mat-raised-button color="primary" (click)="searchVa()">Cari Nomor VA</button>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="queriedObj">
+            <mat-card *ngFor="let obj of queriedObj" class="card">
+                <h3>{{obj.school.name}}</h3>
+                <div class="flex-container">
+                    <div>
+                        <p>Email : {{obj.school.email}}</p>
+                        <p>No HP : {{obj.school.phone}}</p>                        
+                    </div>
+                    <div>
+                        <p>Tipe Pembayaran : {{obj.type}}</p>
+                        <p>Status Pembayaran : {{obj.payment.status}}</p>  
+                        <p>Total yang harus dibayar : {{obj.totalPrice}}</p>                                                                      
+                    </div>
+                    <div>
+                        <button *ngIf="obj.payment.status === 'waiting'" mat-raised-button color="primary" (click)="updateBill(obj._id)">Ubah Status</button>
+                    </div>
+                </div>
+            </mat-card>    
+        </div>
+
+       
+    </mat-card-content>
+</mat-card>
   

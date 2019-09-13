@@ -16,6 +16,36 @@ export class AccomodationService {
     this.userToken = JSON.parse(localStorage.getItem('token'));
   }
 
+  public searchVA(vanumber) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+    
+    return this.http.post<any>(this.config.baseUrl + 'bills/search', vanumber, {headers: headers})
+      .pipe(
+        map(resp => { 
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
+  public changeStatus(bill) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+    
+    return this.http.post<any>(this.config.baseUrl + 'bills/force-update', bill, {headers: headers})
+      .pipe(
+        map(resp => { 
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
   public getAccomodations() {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
