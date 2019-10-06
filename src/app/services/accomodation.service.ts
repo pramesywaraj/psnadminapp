@@ -88,6 +88,20 @@ export class AccomodationService {
       );
   }
 
+  public editAccomodation(accomodation) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', 'Bearer ' + this.userToken);
+    return this.http.put<any>(this.config.baseUrl + 'accommodation', accomodation, {headers: headers})
+      .pipe(
+        map(resp => {
+          return resp;
+        },
+        err => console.log(err)
+        )
+      );
+  }
+
   public deleteAccomodation(id) {
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');

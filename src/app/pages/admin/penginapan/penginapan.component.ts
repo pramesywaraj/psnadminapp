@@ -29,12 +29,16 @@ import { DatePipe } from '@angular/common';
 
 export class PenginapanComponent implements OnInit, OnDestroy {
 
-  columnsToDisplay = ['name', 'quota', 'pricePerNight', 'reservedQuota', 'action'];
+  columnsToDisplay = ['name', 'quota', 'pricePerNight', 'bookingAmount', 'delete', 'edit'];
   accomodationList: any = [];
   bookersList: any = [];
 
   teacherBookers: any = [];
   studentBookers: any = [];
+
+  nameUpdate: string;
+  quotaUpdate: number;
+  priceUpdate: number;
   
   subscribe: Subscription;
   subscribe2: Subscription;  
@@ -102,6 +106,28 @@ export class PenginapanComponent implements OnInit, OnDestroy {
     } else {
       alert('Form belum terisi dengan benar');
     }
+  }
+
+  editAccomodation(el) {
+    let temp = el;
+    delete temp.bookingAmount;
+    delete temp.endDate;
+    delete temp.reservedQuota;
+    delete temp.startDate;
+    delete temp.__v;
+
+    console.log(temp);
+
+    this.accomodationService.editAccomodation(temp).subscribe(
+      res => {
+        alert('Paket berhasil diupdate');
+        this.ngOnInit();
+      },
+      err => {
+        console.log(err);
+        alert('Paket gagal dupdate.')
+      }
+    );
   }
 
   deleteAccomodation(id) {
