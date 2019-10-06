@@ -8,13 +8,16 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AccomodationService } from '../../../services/accomodation.service';
 
+
 import * as FileSaver from 'file-saver';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-penginapan',
   templateUrl: './penginapan.component.html',
   styleUrls: ['./penginapan.component.scss'],
+  providers: [DatePipe],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -38,12 +41,14 @@ export class PenginapanComponent implements OnInit, OnDestroy {
 
   accomodation : FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private accomodationService: AccomodationService) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private accomodationService: AccomodationService, private datePipe: DatePipe) {
     this.accomodation = this.formBuilder.group(
       {
         name : ["", Validators.required],
         quota : ["", Validators.required],
-        pricePerNight : ["", Validators.required]     
+        pricePerNight : ["", Validators.required],
+        startDate: ["", Validators.required],
+        endDate: ["", Validators.required],
       }
     );
   }
@@ -78,6 +83,9 @@ export class PenginapanComponent implements OnInit, OnDestroy {
   }
 
   postAccomodation() {
+    const temp = this.accomodation.value;
+    temp.startDate = this.datePipe.transform(temp.startDate, 'MM-dd-yyyy');
+    temp.endDate = this.datePipe.transform(temp.endDate, 'MM-dd-yyyy');    
     if(this.accomodation.valid) {
       this.accomodationService.postAccomodation(this.accomodation.value).subscribe(
         res => {

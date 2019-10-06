@@ -18,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 
 import { HeaderComponent } from './components/header/header.component';
@@ -63,7 +64,9 @@ import { EditLombaComponent } from './pages/admin/perlombaan/edit-lomba/edit-lom
     HttpClientModule,
     MatGridListModule,
     MatTableModule,
-    MatTabsModule
+    MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [RouteGuardGuard],
   bootstrap: [AppComponent]
